@@ -31,14 +31,19 @@ def cofactor(matrix):
     if len(matrix) == 2:
         cofactor = [i[::-1] for i in matrix]
         cofactor = cofactor[::-1]
-        cofactor = [[cofactor[i][j] if (i + j) % 2 == 0 else -cofactor[i][j]
-                     for j in range(len(cofactor[i]))]
-                    for i in range(len(cofactor))]
+        cofactor = [
+            [
+                cofactor[i][j] if (i + j) % 2 == 0 else -cofactor[i][j]
+                for j in range(len(cofactor[i]))
+            ]
+            for i in range(len(cofactor))
+        ]
         return cofactor
     cofactor = [[0 for _ in range(len(matrix))] for _ in matrix]
     for i in range(len(matrix)):
         for j in range(len(matrix[i])):
-            mini = [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:
-            ])]
+            mini = [
+                row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])
+            ]
             cofactor[i][j] = ((-1) ** (i + j)) * determinant(mini)
     return cofactor
