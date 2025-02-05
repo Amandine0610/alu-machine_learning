@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 import numpy as np
 
-def  definiteness(matrix):
+def definiteness(matrix):
+
+
     # Check if matrix is a numpy.ndarray
     if not isinstance(matrix, np.ndarray):
         raise TypeError("matrix must be a numpy.ndarray")
