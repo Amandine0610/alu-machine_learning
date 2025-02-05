@@ -42,4 +42,3 @@ def minor(matrix):
                 mini[k].pop(j)
             minor[i][j] = determinant(mini)
     return minor
-    
