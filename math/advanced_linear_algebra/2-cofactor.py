@@ -49,3 +49,4 @@ def cofactor(matrix):
             if (i + j) % 2 == 1:
                 cofactor[i][j] = -1 * determinant(mini)
     return cofactor
+    

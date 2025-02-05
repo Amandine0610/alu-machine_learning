@@ -69,3 +69,4 @@ def inverse(matrix):
             adjugate[j][i] = copy[i][j]
     inverse = [[j / det for j in i] for i in adjugate]
     return inverse
+    

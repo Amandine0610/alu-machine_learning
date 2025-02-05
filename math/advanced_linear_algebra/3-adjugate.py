@@ -59,3 +59,4 @@ def adjugate(matrix):
         for j in range(len(adjugate[i])):
             adjugate[j][i] = copy[i][j]
     return adjugate
+    
