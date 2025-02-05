@@ -21,7 +21,8 @@ def definiteness(matrix):
     Determines the definiteness of a square, symmetric matrix.
 
     Args:
-    matrix (numpy.ndarray): The matrix whose definiteness needs to be determined.
+    matrix (numpy.ndarray): 
+    The matrix whose definiteness needs to be determined.
 
     Returns:
         str: One of the following strings:
