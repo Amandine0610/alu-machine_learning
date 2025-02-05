@@ -2,6 +2,7 @@
 """Function that calculates the inverse of a matrix"""
 
 def determinant(matrix):
+    
     """Function that calculates the determinant of a matrix"""
     if len(matrix) == 1 and len(matrix[0]) == 0:
         return 1
