@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Function that calculates the inverse of a matrix"""
 
-
 def determinant(matrix):
     """Function that calculates the determinant of a matrix"""
     if len(matrix) == 1 and len(matrix[0]) == 0:
@@ -69,4 +68,3 @@ def inverse(matrix):
             adjugate[j][i] = copy[i][j]
     inverse = [[j / det for j in i] for i in adjugate]
     return inverse
-    
