@@ -1,28 +1,31 @@
 #!/usr/bin/env python3
+"""Function that calculates the determinant of a matrix"""
+
+
 def determinant(matrix):
-    # Check if matrix is a list of lists
-    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
+    """Function that calculates the determinant of a matrix"""
+    if type(matrix) is not list or len(matrix) == 0:
         raise TypeError("matrix must be a list of lists")
-
-    # Check if matrix is square
-    rows = len(matrix)
-    if any(len(row) != rows for row in matrix):
-        raise ValueError("matrix must be a square matrix")
-    
-    # Base case for 0x0 matrix
-    if rows == 0:
-        return 1  # The determinant of a 0x0 matrix is defined as 1
-
-    # Base case for 1x1 matrix
-    if rows == 1:
+    if len(matrix) > 0:
+        for i in matrix:
+            if type(i) is not list:
+                raise TypeError("matrix must be a list of lists")
+    if len(matrix) == 1 and len(matrix[0]) == 0:
+        return 1
+    for i in matrix:
+        if len(i) != len(matrix):
+            raise ValueError("matrix must be a square matrix")
+    if len(matrix) == 1 and len(matrix) == 1:
         return matrix[0][0]
-
-    # Recursively calculate determinant for larger matrices
-    det = 0
-    for col in range(rows):
-        # Create minor matrix by excluding the current row and column
-        minor = [row[:col] + row[col+1:] for row in matrix[1:]]
-        # Add or subtract the determinant of the minor, depending on the column
-        det += (-1) ** col * matrix[0][col] * determinant(minor)
-    
-    return det
+    if len(matrix) == 2:
+        return ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]))
+    det = []
+    for i in range(len(matrix)):
+        mini = [[j for j in matrix[i]] for i in range(1, len(matrix))]
+        for j in range(len(mini)):
+            mini[j].pop(i)
+        if i % 2 == 0:
+            det.append(matrix[0][i] * determinant(mini))
+        if i % 2 == 1:
+            det.append(-1 * matrix[0][i] * determinant(mini))
+    return sum(det)
