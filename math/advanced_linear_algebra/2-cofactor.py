@@ -38,6 +38,7 @@ def cofactor(matrix):
     cofactor = [[0 for _ in range(len(matrix))] for _ in matrix]
     for i in range(len(matrix)):
         for j in range(len(matrix[i])):
-            mini = [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])]
+            mini = [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:
+            ])]
             cofactor[i][j] = ((-1) ** (i + j)) * determinant(mini)
     return cofactor
