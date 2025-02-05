@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+
 """Function that calculates the inverse of a matrix"""
+
 
 def determinant(matrix):
     """Function that calculates the determinant of a matrix"""
