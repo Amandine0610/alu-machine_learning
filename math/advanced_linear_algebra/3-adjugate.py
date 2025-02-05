@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """Function that calculates the adjugate matrix of a matrix"""
 
 
@@ -8,12 +9,10 @@ def determinant(matrix):
         return ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]))
     det = []
     for i in range(len(matrix)):
-        mini = [[j for j in matrix[i]] for i in range(1, len(matrix))]
-        for j in range(len(mini)):
-            mini[j].pop(i)
+        mini = [row[:i] + row[i+1:] for row in matrix[1:]]
         if i % 2 == 0:
             det.append(matrix[0][i] * determinant(mini))
-        if i % 2 == 1:
+        else:
             det.append(-1 * matrix[0][i] * determinant(mini))
     return sum(det)
 
@@ -27,17 +26,11 @@ def cofactor(matrix):
                      for j in range(len(cofactor[i]))]
                     for i in range(len(cofactor))]
         return cofactor
-    cofactor = [[j for j in matrix[i]] for i in range(len(matrix))]
+    cofactor = [[0 for _ in row] for row in matrix]
     for i in range(len(matrix)):
         for j in range(len(matrix[i])):
-            mini = [[j for j in matrix[i]] for i in range(len(matrix))]
-            mini = mini[:i] + mini[i + 1:]
-            for k in range(len(mini)):
-                mini[k].pop(j)
-            if (i + j) % 2 == 0:
-                cofactor[i][j] = determinant(mini)
-            if (i + j) % 2 == 1:
-                cofactor[i][j] = -1 * determinant(mini)
+            mini = [row[:j] + row[j+1:] for row in (matrix[:i] + matrix[i+1:])]
+            cofactor[i][j] = ((-1) ** (i + j)) * determinant(mini)
     return cofactor
 
 
@@ -51,12 +44,8 @@ def adjugate(matrix):
     for i in matrix:
         if len(matrix) != len(i):
             raise ValueError("matrix must be a non-empty square matrix")
-    if len(matrix) == 1 and len(matrix) == 1:
+    if len(matrix) == 1 and len(matrix[0]) == 1:
         return [[1]]
-    adjugate = cofactor(matrix)
-    copy = [[j for j in adjugate[i]] for i in range(len(adjugate))]
-    for i in range(len(adjugate)):
-        for j in range(len(adjugate[i])):
-            adjugate[j][i] = copy[i][j]
-    return adjugate
-    
+    cofactors = cofactor(matrix)
+    adjugate_matrix = [list(row) for row in zip(*cofactors)]
+    return adjugate_matrix
