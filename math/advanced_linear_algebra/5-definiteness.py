@@ -1,3 +1,16 @@
+"""
+This module contains a function that calculates the definiteness of a matrix.
+The definiteness is determined based on the eigenvalues of the matrix and is classified as:
+
+- Positive definite
+- Positive semi-definite
+- Negative definite
+- Negative semi-definite
+- Indefinite
+
+The matrix must be a square, symmetric numpy ndarray.
+"""
+
 #!/usr/bin/env python3
 import numpy as np
 
