@@ -2,18 +2,20 @@
 import numpy as np
 
 def definiteness(matrix):
-    # Check if matrix is a numpy ndarray
+    # Check if matrix is a numpy.ndarray
     if not isinstance(matrix, np.ndarray):
         raise TypeError("matrix must be a numpy.ndarray")
     
-    # Check if the matrix is square (n x n)
+    # Check if the matrix is square
     if matrix.shape[0] != matrix.shape[1]:
         return None
     
-    # Calculate eigenvalues of the matrix
-    eigenvalues = np.linalg.eigvals(matrix)
+    # Check if matrix is symmetric
+    if not np.array_equal(matrix, matrix.T):
+        return None
     
-    # Check for positive definite, positive semi-definite, negative semi-definite, negative definite, or indefinite
+    # Calculate definiteness based on eigenvalues
+    eigenvalues = np.linalg.eigvals(matrix)
     if np.all(eigenvalues > 0):
         return "Positive definite"
     elif np.all(eigenvalues >= 0):
