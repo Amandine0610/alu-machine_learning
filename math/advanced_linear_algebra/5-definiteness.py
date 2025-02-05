@@ -19,18 +19,6 @@ import numpy as np
 def definiteness(matrix):
     """
     Determines the definiteness of a square, symmetric matrix.
-
-    Args:
-    matrix (numpy.ndarray): 
-    The matrix whose definiteness needs to be determined.
-
-    Returns:
-        str: One of the following strings:
-            - "Positive definite"
-            - "Positive semi-definite"
-            - "Negative definite"
-            - "Negative semi-definite"
-            - "Indefinite"
     """
     # Check if matrix is a numpy.ndarray
     if not isinstance(matrix, np.ndarray):
