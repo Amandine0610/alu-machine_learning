@@ -68,4 +68,5 @@ def inverse(matrix):
         for j in range(len(adjugate[i])):
             adjugate[j][i] = copy[i][j]
     inverse = [[j / det for j in i] for i in adjugate]
+    
     return inverse
