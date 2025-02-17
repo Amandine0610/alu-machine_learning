@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
+"""
+Module to compute the derivative of a polynomial.
+"""
 
-poly_derivative = __import__('10-matisse').poly_derivative
 
-poly = [5, 3, 0, 1]
-print(poly_derivative(poly))  # Expected output: [3, 0, 3]
+def poly_derivative(poly):
+    """
+    Computes the derivative of a polynomial.
+    """
+    if (not isinstance(poly, list) or not all(isinstance(c, (int, float)) for c in poly)):
+        return None
+    if len(poly) == 0 or poly == [0]:
+        return [0]
+
+    derivative = [i * coef for i, coef in enumerate(poly)][1:]  # Skip constant term
+
+    return derivative if derivative else [0]
