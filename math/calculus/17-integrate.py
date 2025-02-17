@@ -9,7 +9,8 @@ def poly_integral(poly, C=0):
     """
     Computes the integral of a polynomial.
     """
-    if not isinstance(poly, list) or not isinstance(C, (int, float)) or not all(isinstance(c, (int, float)) for c in poly):
+    if not isinstance(poly, list) or not isinstance(C, (int, float)) or
+     not all(isinstance(c, (int, float)) for c in poly):
         return None
     if not poly:
         return None  # Empty list should return None
