@@ -24,4 +24,4 @@ def poly_integral(poly, C=0):
     integral = [int(x) if isinstance(x, float) and x.is_integer() else x
                 for x in integral]
 
-    return integral   
+    return integral    
