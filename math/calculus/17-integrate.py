@@ -5,12 +5,6 @@ Module to compute the integral of a polynomial.
 """
 
 
-#!/usr/bin/env python3
-"""
-Module to compute the integral of a polynomial.
-"""
-
-
 def poly_integral(poly, C=0):
     """
     Computes the integral of a polynomial.
@@ -31,5 +25,4 @@ def poly_integral(poly, C=0):
                 for x in integral]
 
     return integral
-
-
+    
