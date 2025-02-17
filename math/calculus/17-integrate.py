@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-#!/usr/bin/env python3
 """
 Module to compute the integral of a polynomial.
 """
