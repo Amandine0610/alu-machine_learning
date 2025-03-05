@@ -3,7 +3,7 @@
 
 
 def mat_mul(mat1, mat2):
-    """Performs matrix multiplication between mat1 and mat2.""" 
+"""Performs matrix multiplication between mat1 and mat2.""" 
     # Check if matrices can be multiplied
     if len(mat1[0]) != len(mat2):
         return None
