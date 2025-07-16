@@ -4,7 +4,9 @@
     """
 
 import requests
-
+"""
+    Returns a list of ship names that can hold at least `passengerCount` passengers.
+    """
 def availableShips(passengerCount):
     url = "https://swapi.dev/api/starships/"
     ships = []
