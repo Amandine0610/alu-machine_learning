@@ -6,26 +6,25 @@
 import requests
 
 def availableShips(passengerCount):
-    """
-    Returns a list of ship names that can hold at least `passengerCount` passengers.
-    """
     url = "https://swapi.dev/api/starships/"
     ships = []
 
     while url:
         response = requests.get(url)
         if response.status_code != 200:
-            break  # If something goes wrong, exit the loop
+            break  # Skip if response fails
 
         data = response.json()
-        for ship in data['results']:
-            passengers = ship.get('passengers', '0').replace(',', '').replace('n/a', '0').replace('unknown', '0')
+        results = data.get("results", [])
+
+        for ship in results:
+            passengers = ship.get("passengers", "0").replace(",", "").split()[0]  # Strip commas and extra text
             try:
                 if int(passengers) >= passengerCount:
-                    ships.append(ship['name'])
+                    ships.append(ship["name"])
             except ValueError:
-                continue  # Skip entries with non-numeric passengers
+                continue  # Skip if passengers can't be converted to int
 
-        url = data.get('next')
+        url = data.get("next")
 
     return ships
