@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+    Returns a list of ship names that can hold at least `passengerCount` passengers.
+    """
+
 import requests
 
 def availableShips(passengerCount):
