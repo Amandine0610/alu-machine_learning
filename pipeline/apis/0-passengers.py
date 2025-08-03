@@ -1,32 +1,31 @@
 #!/usr/bin/env python3
-"""
-    Returns a list of ship names that can hold at least `passengerCount` passengers.
-    """
+""" Return list of ships"""
+
 
 import requests
-"""
-    Returns a list of ship names that can hold at least `passengerCount` passengers.
-    """
+
+
 def availableShips(passengerCount):
-    url = "https://swapi.dev/api/starships/"
-    ships = []
+    """ Return list of ships
 
-    while url:
-        response = requests.get(url)
-        if response.status_code != 200:
-            break  # Skip if response fails
+    Args:
+        passengerCount (int): number of ships
+    """
 
-        data = response.json()
-        results = data.get("results", [])
+    res = requests.get('https://swapi-api.alx-tools.com/api/starships')
 
-        for ship in results:
-            passengers = ship.get("passengers", "0").replace(",", "").split()[0]  # Strip commas and extra text
+    output = []
+    while res.status_code == 200:
+        res = res.json()
+        for ship in res['results']:
+            passengers = ship['passengers'].replace(',', '')
             try:
                 if int(passengers) >= passengerCount:
-                    ships.append(ship["name"])
+                    output.append(ship['name'])
             except ValueError:
-                continue  # Skip if passengers can't be converted to int
-
-        url = data.get("next")
-
-    return ships
+                pass
+        try:
+            res = requests.get(res['next'])
+        except Exception:
+            break
+    return output
