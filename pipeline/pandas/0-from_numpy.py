@@ -1,19 +1,34 @@
-import pandas as pd
+#!/usr/bin/env python3
+'''
+    Function def from_numpy(array):
+    that creates a pd.DataFrame from a np.ndarray
+'''
+
+
 import string
+import pandas as pd
+
 
 def from_numpy(array):
-    """
-    Creates a pd.DataFrame from a np.ndarray with capitalized alphabetical column labels.
-    
-    Args:
-        array: np.ndarray, input array to convert
-        
-    Returns:
-        pd.DataFrame with columns labeled A, B, C, ... in alphabetical order
-    """
-    # Get the number of columns from the array shape
-    num_cols = array.shape[1]
-    # Generate column labels using uppercase alphabet (A, B, C, ...)
-    columns = list(string.ascii_uppercase[:num_cols])
-    # Create DataFrame with array data and column labels
-    return pd.DataFrame(array, columns=columns)
+    '''
+        Function def from_numpy(array):
+        that creates a pd.DataFrame from a np.ndarray
+
+        Args:
+            - array is the np.ndarray from which you should
+            create the pd.DataFrame
+            - The columns of the pd.DataFrame should be labeled
+            in alphabetical order and capitalized.
+
+        Returns:
+            - Returns: the newly created pd.DataFrame
+    '''
+    num_columns = array.shape[1]
+
+    # Generate the column labels (A, B, C, ...)
+    columns = [chr(65 + i) for i in range(num_columns)]
+
+    # Create the DataFrame
+    df = pd.DataFrame(array, columns=columns)
+
+    return df
