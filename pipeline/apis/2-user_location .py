@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 
-
 """ Return list of ships"""
 
 import requests
 import sys
 import time
-
 
 if __name__ == "__main__":
     res = requests.get(sys.argv[1])
@@ -15,7 +13,7 @@ if __name__ == "__main__":
         rate_limit = int(res.headers.get('X-Ratelimit-Reset'))
         current_time = int(time.time())
         diff = (rate_limit - current_time) // 60
-        print("Reset in {} min".format(diff))
+        print("Reset in {} min".format(diff))  # Fixed: Use .format() with diff
         # get remaining rate
 
     elif res.status_code == 404:
