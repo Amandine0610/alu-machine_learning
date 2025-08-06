@@ -6,7 +6,7 @@ using the unofficial SpaceX API
 
 import requests
 from datetime import datetime
-import pytz
+
 
 
 def get_upcoming_launch():
