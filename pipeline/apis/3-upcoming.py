@@ -31,7 +31,7 @@ def get_upcoming_launch():
         
         # Get rocket information
         rocket_id = upcoming_launch['rocket']
-        rocket_url = f"https://api.spacexdata.com/v4/rockets/{rocket_id}"
+        rocket_url = "https://api.spacexdata.com/v4/rockets/{}".format(rocket_id)
         rocket_response = requests.get(rocket_url)
         rocket_response.raise_for_status()
         rocket = rocket_response.json()
@@ -39,7 +39,7 @@ def get_upcoming_launch():
         
         # Get launchpad information
         launchpad_id = upcoming_launch['launchpad']
-        launchpad_url = f"https://api.spacexdata.com/v4/launchpads/{launchpad_id}"
+        launchpad_url = "https://api.spacexdata.com/v4/launchpads/{}".format(launchpad_id)
         launchpad_response = requests.get(launchpad_url)
         launchpad_response.raise_for_status()
         launchpad = launchpad_response.json()
@@ -63,15 +63,17 @@ def get_upcoming_launch():
         launch_name = upcoming_launch.get('name', 'Unknown')
         
         # Format the output
-        result = f"{launch_name} ({date_str}) {rocket_name} - {launchpad_name} ({launchpad_locality})"
+        result = "{} ({}) {} - {} ({})".format(
+            launch_name, date_str, rocket_name, launchpad_name, launchpad_locality
+        )
         return result
         
     except requests.exceptions.RequestException as e:
-        return f"Error fetching data: {e}"
+        return "Error fetching data: {}".format(e)
     except KeyError as e:
-        return f"Error parsing data: Missing field {e}"
+        return "Error parsing data: Missing field {}".format(e)
     except Exception as e:
-        return f"Unexpected error: {e}"
+        return "Unexpected error: {}".format(e)
 
 
 if __name__ == '__main__':
