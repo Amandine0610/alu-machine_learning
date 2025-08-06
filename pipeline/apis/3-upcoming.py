@@ -27,14 +27,16 @@ def get_upcoming_launch():
         upcoming_launch = launches[0]
         # Get rocket information
         rocket_id = upcoming_launch['rocket']
-        rocket_url = "https://api.spacexdata.com/v4/rockets/{}".format(rocket_id)
+        rocket_url = "https://api.spacexdata.com/v4/rockets/{}".format
+        (rocket_id)
         rocket_response = requests.get(rocket_url)
         rocket_response.raise_for_status()
         rocket = rocket_response.json()
         rocket_name = rocket['name']
         # Get launchpad information
         launchpad_id = upcoming_launch['launchpad']
-        launchpad_url = "https://api.spacexdata.com/v4/launchpads/{}".format(launchpad_id)
+        launchpad_url = "https://api.spacexdata.com/v4/launchpads/{}".format
+        (launchpad_id)
         launchpad_response = requests.get(launchpad_url)
         launchpad_response.raise_for_status()
         launchpad = launchpad_response.json()
@@ -45,10 +47,10 @@ def get_upcoming_launch():
         date_str = upcoming_launch.get('date_local', 'TBD')
         if date_str == 'TBD':
             # If date_local is not available, try to format from date_unix
-            if upcoming_launch.get('date_unix'):
+          if upcoming_launch.get('date_unix'):
                 utc_time = datetime.utcfromtimestamp(upcoming_launch['date_unix'])
                 date_str = utc_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
-            else:
+          else:
                 date_str = 'TBD'
         # Get launch name
         launch_name = upcoming_launch.get('name', 'Unknown')
@@ -63,5 +65,7 @@ def get_upcoming_launch():
         return "Error parsing data: Missing field {}".format(e)
     except Exception as e:
         return "Unexpected error: {}".format(e)
+    
+    
 if __name__ == '__main__':
     print(get_upcoming_launch())
