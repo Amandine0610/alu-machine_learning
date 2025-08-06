@@ -8,7 +8,6 @@ import requests
 from datetime import datetime
 
 
-
 def get_upcoming_launch():
     """
     Fetches the upcoming SpaceX launch information from the API
@@ -47,17 +46,15 @@ def get_upcoming_launch():
         launchpad_locality = launchpad['locality']
         
         # Format the date in local time
-        # Convert from UTC to local timezone
-        if upcoming_launch.get('date_unix'):
-            utc_time = datetime.fromtimestamp(upcoming_launch['date_unix'], tz=pytz.UTC)
-            local_time = utc_time.astimezone()
-            date_str = local_time.strftime("%Y-%m-%dT%H:%M:%S%z")
-            # Format timezone offset correctly (add colon)
-            if len(date_str) >= 5 and date_str[-5] in ['+', '-']:
-                date_str = date_str[:-2] + ':' + date_str[-2:]
-        else:
-            # Fallback to ISO string if date_unix is not available
-            date_str = upcoming_launch.get('date_local', 'TBD')
+        # Use the date_local field which is already in local time
+        date_str = upcoming_launch.get('date_local', 'TBD')
+        if date_str == 'TBD':
+            # If date_local is not available, try to format from date_unix
+            if upcoming_launch.get('date_unix'):
+                utc_time = datetime.utcfromtimestamp(upcoming_launch['date_unix'])
+                date_str = utc_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
+            else:
+                date_str = 'TBD'
         
         # Get launch name
         launch_name = upcoming_launch.get('name', 'Unknown')
